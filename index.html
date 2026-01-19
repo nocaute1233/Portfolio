@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio de Fotografia - Galeria profissional de fotos organizadas por pastas">
   <title>Portfolio de Fotografia</title>
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Header -->
   <header class="header">
@@ -38,12 +40,24 @@
 
   <!-- Main Container -->
   <main class="container">
+    <!-- Introduction Section -->
+    <section id="intro" class="intro-section">
+      <div class="intro-content">
+        <h1 class="intro-title">Bem Vindo(a) ao meu portfolio</h1>
+        <p class="intro-text">
+          Eu sou o <strong>Rúben Milhazes</strong> do <strong>10MT</strong>.
+          Aqui poderás encontrar o meus trabalhos no âmbito da disciplina de <strong>PPM</strong>
+          que estão divididos por várias pastas com vários temas diferentes.
+        </p>
+      </div>
+    </section>
+
     <!-- Folders View -->
     <div id="folders-view">
       <div class="gallery-grid" id="folders-grid">
         <!-- Folder cards will be inserted here -->
       </div>
-      
+
       <!-- Empty State -->
       <div class="empty-state" id="folders-empty">
         <div class="empty-state-icon">📁</div>
@@ -57,7 +71,8 @@
 
     <!-- Photos View -->
     <div id="photos-view" class="hidden">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
         <div>
           <h2 id="folder-view-title"></h2>
           <p id="folder-view-description" style="color: var(--text-secondary);"></p>
@@ -66,11 +81,11 @@
           📤 Upload Fotos
         </button>
       </div>
-      
+
       <div class="photo-grid" id="photos-grid">
         <!-- Photo items will be inserted here -->
       </div>
-      
+
       <!-- Empty State for Photos -->
       <div class="empty-state" id="photos-empty">
         <div class="empty-state-icon">🖼️</div>
@@ -94,21 +109,13 @@
         <form id="folder-form">
           <div class="form-group">
             <label class="form-label" for="folder-name">Nome da Pasta</label>
-            <input 
-              type="text" 
-              class="form-input" 
-              id="folder-name" 
-              placeholder="Ex: Paisagens, Retratos, Eventos..."
-              required
-            >
+            <input type="text" class="form-input" id="folder-name" placeholder="Ex: Paisagens, Retratos, Eventos..."
+              required>
           </div>
           <div class="form-group">
             <label class="form-label" for="folder-description">Descrição</label>
-            <textarea 
-              class="form-textarea" 
-              id="folder-description" 
-              placeholder="Descreva o conteúdo desta pasta..."
-            ></textarea>
+            <textarea class="form-textarea" id="folder-description"
+              placeholder="Descreva o conteúdo desta pasta..."></textarea>
           </div>
         </form>
       </div>
@@ -131,13 +138,7 @@
           <div class="file-upload-icon">📁</div>
           <p class="file-upload-text">Arraste e solte suas fotos aqui</p>
           <p class="file-upload-hint">ou clique para selecionar arquivos</p>
-          <input 
-            type="file" 
-            class="file-input" 
-            id="file-input" 
-            accept="image/*" 
-            multiple
-          >
+          <input type="file" class="file-input" id="file-input" accept="image/*" multiple>
         </div>
         <div id="upload-preview" style="margin-top: var(--spacing-md);"></div>
       </div>
@@ -178,4 +179,5 @@
   <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
+
 </html>
