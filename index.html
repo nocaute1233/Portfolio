@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de Fotografia - Galeria profissional de fotos organizadas por pastas">
+  <title>Portfolio de Fotografia</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="#" class="logo" id="logo-link">📸 Meu Portfolio</a>
+      <div class="header-actions">
+        <button class="btn btn-secondary" id="new-folder-btn">
+          ➕ Nova Pasta
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb" id="breadcrumb">
+    <div class="breadcrumb-content">
+      <span class="breadcrumb-link" id="breadcrumb-home">Início</span>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-current" id="breadcrumb-current"></span>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Folders View -->
+    <div id="folders-view">
+      <div class="gallery-grid" id="folders-grid">
+        <!-- Folder cards will be inserted here -->
+      </div>
+      
+      <!-- Empty State -->
+      <div class="empty-state" id="folders-empty">
+        <div class="empty-state-icon">📁</div>
+        <h2 class="empty-state-title">Nenhuma pasta criada</h2>
+        <p class="empty-state-text">Comece criando uma pasta para organizar suas fotos</p>
+        <button class="btn btn-primary" id="empty-new-folder-btn">
+          ➕ Criar Primeira Pasta
+        </button>
+      </div>
+    </div>
+
+    <!-- Photos View -->
+    <div id="photos-view" class="hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+        <div>
+          <h2 id="folder-view-title"></h2>
+          <p id="folder-view-description" style="color: var(--text-secondary);"></p>
+        </div>
+        <button class="btn btn-primary" id="upload-photos-btn">
+          📤 Upload Fotos
+        </button>
+      </div>
+      
+      <div class="photo-grid" id="photos-grid">
+        <!-- Photo items will be inserted here -->
+      </div>
+      
+      <!-- Empty State for Photos -->
+      <div class="empty-state" id="photos-empty">
+        <div class="empty-state-icon">🖼️</div>
+        <h2 class="empty-state-title">Nenhuma foto nesta pasta</h2>
+        <p class="empty-state-text">Faça upload das suas fotos para começar</p>
+        <button class="btn btn-primary" id="empty-upload-btn">
+          📤 Upload Fotos
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- New/Edit Folder Modal -->
+  <div class="modal" id="folder-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="folder-modal-title">Nova Pasta</h3>
+        <button class="close-btn" id="close-folder-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="folder-form">
+          <div class="form-group">
+            <label class="form-label" for="folder-name">Nome da Pasta</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              id="folder-name" 
+              placeholder="Ex: Paisagens, Retratos, Eventos..."
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="folder-description">Descrição</label>
+            <textarea 
+              class="form-textarea" 
+              id="folder-description" 
+              placeholder="Descreva o conteúdo desta pasta..."
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-folder-btn">Cancelar</button>
+        <button class="btn btn-primary" id="save-folder-btn">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Photos Modal -->
+  <div class="modal" id="upload-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Upload de Fotos</h3>
+        <button class="close-btn" id="close-upload-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="file-upload" id="file-upload-area">
+          <div class="file-upload-icon">📁</div>
+          <p class="file-upload-text">Arraste e solte suas fotos aqui</p>
+          <p class="file-upload-hint">ou clique para selecionar arquivos</p>
+          <input 
+            type="file" 
+            class="file-input" 
+            id="file-input" 
+            accept="image/*" 
+            multiple
+          >
+        </div>
+        <div id="upload-preview" style="margin-top: var(--spacing-md);"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-upload-btn">Cancelar</button>
+        <button class="btn btn-primary" id="confirm-upload-btn" disabled>Upload</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirmar Exclusão</h3>
+        <button class="close-btn" id="close-delete-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <p id="delete-message">Tem certeza que deseja excluir esta pasta e todas as suas fotos?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-delete-btn">Cancelar</button>
+        <button class="btn btn-danger" id="confirm-delete-btn">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">×</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+      <img src="" alt="Foto" class="lightbox-image" id="lightbox-image">
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
