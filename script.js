@@ -75,7 +75,8 @@ const photoDatabase = {
         { file: '20250930_191004417_iOS.jpg', name: 'Contraluz 1' },
         { file: '20260105_170508386_iOS.jpg', name: 'Contraluz 2' },
         { file: '20260105_170537083_iOS.jpg', name: 'Contraluz 3' },
-        { file: '20260105_170539101_iOS.jpg', name: 'Contraluz 4' }
+        { file: '20260105_170539101_iOS.jpg', name: 'Contraluz 4' },
+        { file: '20250930_191004417_iOS.jpg', name: 'Contraluz 5' }
     ],
     'cor': [
         { file: '20251215_165621131_iOS.jpg', name: 'Cor 1' },
@@ -94,7 +95,9 @@ const photoDatabase = {
     'paisagem': [
         { file: '20250930_191000025_iOS.jpg', name: 'Paisagem 1' },
         { file: '20250930_191004417_iOS.jpg', name: 'Paisagem 2' },
-        { file: '20251008_185847445_iOS.jpg', name: 'Paisagem 3' }
+        { file: '20251008_185847445_iOS.jpg', name: 'Paisagem 3' },
+        { file: '20250930_191004417_iOS.jpg', name: 'Paisagem 4' },
+        { file: '20260105_170539101_iOS.jpg', name: 'Paisagem 5' },
     ],
     'profundidade': [
         { file: 'DSC_0007.JPG', name: 'Profundidade 1' },
@@ -117,12 +120,16 @@ const photoDatabase = {
     'reflexo': [
         { file: '20251215_165515035_iOS.jpg', name: 'Reflexo 1' },
         { file: '20251215_170042353_iOS.jpg', name: 'Reflexo 2' },
-        { file: 'IMG_2639.JPG', name: 'Reflexo 3' }
+        { file: 'IMG_2639.JPG', name: 'Reflexo 3' },
+        { file: 'IMG_2641.JPG', name: 'Reflexo 4' },
+        { file: 'IMG_2642.JPG', name: 'Reflexo 5' },
     ],
     'retratos': [
         { file: '20251215_170724242_iOS.jpg', name: 'Retrato 1' },
         { file: '20251215_170744562_iOS.jpg', name: 'Retrato 2' },
-        { file: 'DSC_0006.JPG', name: 'Retrato 3' }
+        { file: 'DSC_0006.JPG', name: 'Retrato 3' },
+        { file: 'DSC_0017.JPG', name: 'Retrato 4' },
+        { file: 'DSC_0018.JPG', name: 'Retrato 5' }
     ],
     'textura': [
         { file: '20251215_165439925_iOS.jpg', name: 'Textura 1' },
