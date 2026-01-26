@@ -122,14 +122,14 @@ const photoDatabase = {
         { file: '20251215_170042353_iOS.jpg', name: 'Reflexo 2' },
         { file: 'IMG_2639.JPG', name: 'Reflexo 3' },
         { file: 'IMG_2641.JPG', name: 'Reflexo 4' },
-        { file: 'IMG_2642.JPG', name: 'Reflexo 5' },
+        { file: 'IMG_2643.JPG', name: 'Reflexo 5' },
     ],
     'retratos': [
         { file: '20251215_170724242_iOS.jpg', name: 'Retrato 1' },
         { file: '20251215_170744562_iOS.jpg', name: 'Retrato 2' },
         { file: 'DSC_0006.JPG', name: 'Retrato 3' },
-        { file: 'DSC_0017.JPG', name: 'Retrato 4' },
-        { file: 'DSC_0018.JPG', name: 'Retrato 5' }
+        { file: 'DSC_0017.jpg', name: 'Retrato 4' },
+        { file: 'DSC_0018.jpg', name: 'Retrato 5' },
     ],
     'textura': [
         { file: '20251215_165439925_iOS.jpg', name: 'Textura 1' },
