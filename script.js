@@ -60,76 +60,76 @@ const categories = {
 // Photo database - mapping to actual files
 const photoDatabase = {
     'arquitetura': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_165840067_iOS.jpg', name: 'Exterior 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170120780_iOS.jpg', name: 'Exterior 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170137834_iOS.jpg', name: 'Exterior 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170153093_iOS.jpg', name: 'Exterior 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170208113_iOS.jpg', name: 'Exterior 5' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_165709317_iOS.jpg', name: 'Interior 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_165924736_iOS.jpg', name: 'Interior 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_165947799_iOS.jpg', name: 'Interior 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_170114564_iOS.jpg', name: 'Interior 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_170406196_iOS.jpg', name: 'Interior 5' }
+        { file: '20260105_165840067_iOS.jpg', name: 'Exterior 1' },
+        { file: '20260105_170120780_iOS.jpg', name: 'Exterior 2' },
+        { file: '20260105_170137834_iOS.jpg', name: 'Exterior 3' },
+        { file: '20260105_170153093_iOS.jpg', name: 'Exterior 4' },
+        { file: '20260105_170208113_iOS.jpg', name: 'Exterior 5' },
+        { file: '20251215_165709317_iOS.jpg', name: 'Interior 1' },
+        { file: '20251215_165924736_iOS.jpg', name: 'Interior 2' },
+        { file: '20251215_165947799_iOS.jpg', name: 'Interior 3' },
+        { file: '20251215_170114564_iOS.jpg', name: 'Interior 4' },
+        { file: '20251215_170406196_iOS.jpg', name: 'Interior 5' }
     ],
     'contraluz': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20250930_191004417_iOS.jpg', name: 'Contraluz 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20260105_170508386_iOS.jpg', name: 'Contraluz 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20260105_170537083_iOS.jpg', name: 'Contraluz 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20260105_170539101_iOS.jpg', name: 'Contraluz 4' }
+        { file: '20250930_191004417_iOS.jpg', name: 'Contraluz 1' },
+        { file: '20260105_170508386_iOS.jpg', name: 'Contraluz 2' },
+        { file: '20260105_170537083_iOS.jpg', name: 'Contraluz 3' },
+        { file: '20260105_170539101_iOS.jpg', name: 'Contraluz 4' }
     ],
     'cor': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/20251215_165621131_iOS.jpg', name: 'Cor 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/20251215_165924736_iOS.jpg', name: 'Cor 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/DSC_1679.JPG', name: 'Cor 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/DSC_1680.JPG', name: 'Cor 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/DSC_1682.JPG', name: 'Cor 5' }
+        { file: '20251215_165621131_iOS.jpg', name: 'Cor 1' },
+        { file: '20251215_165924736_iOS.jpg', name: 'Cor 2' },
+        { file: 'DSC_1679.JPG', name: 'Cor 3' },
+        { file: 'DSC_1680.JPG', name: 'Cor 4' },
+        { file: 'DSC_1682.JPG', name: 'Cor 5' }
     ],
     'forma': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_165621131_iOS.jpg', name: 'Forma 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_165924736_iOS.jpg', name: 'Forma 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_170100309_iOS.jpg', name: 'Forma 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_170910996_iOS.jpg', name: 'Forma 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_171141752_iOS.jpg', name: 'Forma 5' }
+        { file: '20251215_165621131_iOS.jpg', name: 'Forma 1' },
+        { file: '20251215_165924736_iOS.jpg', name: 'Forma 2' },
+        { file: '20251215_170100309_iOS.jpg', name: 'Forma 3' },
+        { file: '20251215_170910996_iOS.jpg', name: 'Forma 4' },
+        { file: '20251215_171141752_iOS.jpg', name: 'Forma 5' }
     ],
     'paisagem': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Paisagem/20250930_191000025_iOS.jpg', name: 'Paisagem 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Paisagem/20250930_191004417_iOS.jpg', name: 'Paisagem 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Paisagem/20251008_185847445_iOS.jpg', name: 'Paisagem 3' }
+        { file: '20250930_191000025_iOS.jpg', name: 'Paisagem 1' },
+        { file: '20250930_191004417_iOS.jpg', name: 'Paisagem 2' },
+        { file: '20251008_185847445_iOS.jpg', name: 'Paisagem 3' }
     ],
     'profundidade': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0007.JPG', name: 'Profundidade 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0011.JPG', name: 'Profundidade 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0330.JPG', name: 'Profundidade 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0342.JPG', name: 'Profundidade 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0343.JPG', name: 'Profundidade 5' }
+        { file: 'DSC_0007.JPG', name: 'Profundidade 1' },
+        { file: 'DSC_0011.JPG', name: 'Profundidade 2' },
+        { file: 'DSC_0330.JPG', name: 'Profundidade 3' },
+        { file: 'DSC_0342.JPG', name: 'Profundidade 4' },
+        { file: 'DSC_0343.JPG', name: 'Profundidade 5' }
     ],
     'luz-sombra': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0005.JPG', name: 'Luz e Sombra 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0010.JPG', name: 'Luz e Sombra 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0324.JPG', name: 'Luz e Sombra 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0331.JPG', name: 'Luz e Sombra 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0340.JPG', name: 'Luz e Sombra 5' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0341.JPG', name: 'Luz e Sombra 6' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/IMG_2637.JPG', name: 'Luz e Sombra 7' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/IMG_2638.JPG', name: 'Luz e Sombra 8' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/IMG_2640.JPG', name: 'Luz e Sombra 9' }
+        { file: 'DSC_0005.JPG', name: 'Luz e Sombra 1' },
+        { file: 'DSC_0010.JPG', name: 'Luz e Sombra 2' },
+        { file: 'DSC_0324.JPG', name: 'Luz e Sombra 3' },
+        { file: 'DSC_0331.JPG', name: 'Luz e Sombra 4' },
+        { file: 'DSC_0340.JPG', name: 'Luz e Sombra 5' },
+        { file: 'DSC_0341.JPG', name: 'Luz e Sombra 6' },
+        { file: 'IMG_2637.JPG', name: 'Luz e Sombra 7' },
+        { file: 'IMG_2638.JPG', name: 'Luz e Sombra 8' },
+        { file: 'IMG_2640.JPG', name: 'Luz e Sombra 9' }
     ],
     'reflexo': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/reflexo/20251215_165515035_iOS.jpg', name: 'Reflexo 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/reflexo/20251215_170042353_iOS.jpg', name: 'Reflexo 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/reflexo/IMG_2639.JPG', name: 'Reflexo 3' }
+        { file: '20251215_165515035_iOS.jpg', name: 'Reflexo 1' },
+        { file: '20251215_170042353_iOS.jpg', name: 'Reflexo 2' },
+        { file: 'IMG_2639.JPG', name: 'Reflexo 3' }
     ],
     'retratos': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/retratos/20251215_170724242_iOS.jpg', name: 'Retrato 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/retratos/20251215_170744562_iOS.jpg', name: 'Retrato 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/retratos/DSC_0006.JPG', name: 'Retrato 3' }
+        { file: '20251215_170724242_iOS.jpg', name: 'Retrato 1' },
+        { file: '20251215_170744562_iOS.jpg', name: 'Retrato 2' },
+        { file: 'DSC_0006.JPG', name: 'Retrato 3' }
     ],
     'textura': [
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/20251215_165439925_iOS.jpg', name: 'Textura 1' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1690.JPG', name: 'Textura 2' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1691.JPG', name: 'Textura 3' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1710.JPG', name: 'Textura 4' },
-        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1712.JPG', name: 'Textura 5' }
+        { file: '20251215_165439925_iOS.jpg', name: 'Textura 1' },
+        { file: 'DSC_1690.JPG', name: 'Textura 2' },
+        { file: 'DSC_1691.JPG', name: 'Textura 3' },
+        { file: 'DSC_1710.JPG', name: 'Textura 4' },
+        { file: 'DSC_1712.JPG', name: 'Textura 5' }
     ]
 };
 
