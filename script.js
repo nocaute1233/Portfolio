@@ -1,477 +1,337 @@
-// ===========================
-// STATE MANAGEMENT
-// ===========================
-let folders = [];
-let currentFolderId = null;
-let currentEditingFolderId = null;
+// Photo categories with descriptions
+const categories = {
+    'todas': {
+        name: 'Todas',
+        description: 'Explore a coleção completa de fotografias',
+        folder: null
+    },
+    'arquitetura': {
+        name: 'Arquitetura',
+        description: 'Fotografias de arquitetura externa e interna, capturando linhas, formas e estruturas',
+        folder: 'Arquitetura'
+    },
+    'contraluz': {
+        name: 'Contraluz',
+        description: 'Técnicas de fotografia em contraluz, explorando silhuetas e luminosidade',
+        folder: 'Contraluz'
+    },
+    'cor': {
+        name: 'Cor',
+        description: 'Composições focadas em cores vibrantes e paletas harmoniosas',
+        folder: 'Cor'
+    },
+    'forma': {
+        name: 'Forma',
+        description: 'Estudos de formas geométricas e orgânicas na fotografia',
+        folder: 'Forma'
+    },
+    'paisagem': {
+        name: 'Paisagem',
+        description: 'Fotografias de paisagens naturais e urbanas',
+        folder: 'Paisagem'
+    },
+    'profundidade': {
+        name: 'Profundidade de Campo',
+        description: 'Experimentos com profundidade de campo e foco seletivo',
+        folder: 'Profundida de Campo'
+    },
+    'luz-sombra': {
+        name: 'Luz e Sombra',
+        description: 'Interação entre luz e sombra, criando contraste e dramaticidade',
+        folder: 'luz sombra'
+    },
+    'reflexo': {
+        name: 'Reflexo',
+        description: 'Fotografias de reflexos em superfícies diversas',
+        folder: 'reflexo'
+    },
+    'retratos': {
+        name: 'Retratos',
+        description: 'Fotografia de retratos e expressões humanas',
+        folder: 'retratos'
+    },
+    'textura': {
+        name: 'Textura',
+        description: 'Estudos de texturas e padrões visuais',
+        folder: 'textura'
+    }
+};
+
+// Photo database - mapping to actual files
+const photoDatabase = {
+    'arquitetura': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_165840067_iOS.jpg', name: 'Exterior 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170120780_iOS.jpg', name: 'Exterior 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170137834_iOS.jpg', name: 'Exterior 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170153093_iOS.jpg', name: 'Exterior 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/exteriores/20260105_170208113_iOS.jpg', name: 'Exterior 5' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_165709317_iOS.jpg', name: 'Interior 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_165924736_iOS.jpg', name: 'Interior 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_165947799_iOS.jpg', name: 'Interior 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_170114564_iOS.jpg', name: 'Interior 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Arquitetura/interiores/20251215_170406196_iOS.jpg', name: 'Interior 5' }
+    ],
+    'contraluz': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20250930_191004417_iOS.jpg', name: 'Contraluz 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20260105_170508386_iOS.jpg', name: 'Contraluz 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20260105_170537083_iOS.jpg', name: 'Contraluz 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Contraluz/20260105_170539101_iOS.jpg', name: 'Contraluz 4' }
+    ],
+    'cor': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/20251215_165621131_iOS.jpg', name: 'Cor 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/20251215_165924736_iOS.jpg', name: 'Cor 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/DSC_1679.JPG', name: 'Cor 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/DSC_1680.JPG', name: 'Cor 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Cor/DSC_1682.JPG', name: 'Cor 5' }
+    ],
+    'forma': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_165621131_iOS.jpg', name: 'Forma 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_165924736_iOS.jpg', name: 'Forma 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_170100309_iOS.jpg', name: 'Forma 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_170910996_iOS.jpg', name: 'Forma 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Forma/20251215_171141752_iOS.jpg', name: 'Forma 5' }
+    ],
+    'paisagem': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Paisagem/20250930_191000025_iOS.jpg', name: 'Paisagem 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Paisagem/20250930_191004417_iOS.jpg', name: 'Paisagem 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Paisagem/20251008_185847445_iOS.jpg', name: 'Paisagem 3' }
+    ],
+    'profundidade': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0007.JPG', name: 'Profundidade 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0011.JPG', name: 'Profundidade 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0330.JPG', name: 'Profundidade 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0342.JPG', name: 'Profundidade 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/Profundida de Campo/DSC_0343.JPG', name: 'Profundidade 5' }
+    ],
+    'luz-sombra': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0005.JPG', name: 'Luz e Sombra 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0010.JPG', name: 'Luz e Sombra 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0324.JPG', name: 'Luz e Sombra 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0331.JPG', name: 'Luz e Sombra 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0340.JPG', name: 'Luz e Sombra 5' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/DSC_0341.JPG', name: 'Luz e Sombra 6' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/IMG_2637.JPG', name: 'Luz e Sombra 7' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/IMG_2638.JPG', name: 'Luz e Sombra 8' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/luz sombra/IMG_2640.JPG', name: 'Luz e Sombra 9' }
+    ],
+    'reflexo': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/reflexo/20251215_165515035_iOS.jpg', name: 'Reflexo 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/reflexo/20251215_170042353_iOS.jpg', name: 'Reflexo 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/reflexo/IMG_2639.JPG', name: 'Reflexo 3' }
+    ],
+    'retratos': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/retratos/20251215_170724242_iOS.jpg', name: 'Retrato 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/retratos/20251215_170744562_iOS.jpg', name: 'Retrato 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/retratos/DSC_0006.JPG', name: 'Retrato 3' }
+    ],
+    'textura': [
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/20251215_165439925_iOS.jpg', name: 'Textura 1' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1690.JPG', name: 'Textura 2' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1691.JPG', name: 'Textura 3' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1710.JPG', name: 'Textura 4' },
+        { file: '../../Downloads/OneDrive_2026-01-25/10 PPM_Ruben Milhazes/textura/DSC_1712.JPG', name: 'Textura 5' }
+    ]
+};
+
+// State management
+let currentCategory = 'todas';
 let currentPhotoIndex = 0;
-let selectedFiles = [];
+let currentPhotos = [];
 
-// ===========================
-// LOCAL STORAGE
-// ===========================
-const STORAGE_KEY = 'photography_portfolio';
+// DOM elements
+const categoryGrid = document.getElementById('categoryGrid');
+const photoGrid = document.getElementById('photoGrid');
+const galleryTitle = document.getElementById('galleryTitle');
+const galleryDescription = document.getElementById('galleryDescription');
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxCategory = document.getElementById('lightboxCategory');
+const lightboxCounter = document.getElementById('lightboxCounter');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
 
-function loadFromStorage() {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (data) {
-      folders = JSON.parse(data);
-    }
-
-    // Seed default folder if empty
-    if (folders.length === 0) {
-      createFolder("10 PPM Rúben Milhazes", "Trabalhos da disciplina de PPM");
-    }
-  } catch (error) {
-    console.error('Error loading from storage:', error);
-  }
+// Initialize the app
+function init() {
+    renderCategories();
+    renderPhotos('todas');
+    setupEventListeners();
 }
 
-function saveToStorage() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(folders));
-  } catch (error) {
-    console.error('Error saving to storage:', error);
-  }
-}
+// Render category cards
+function renderCategories() {
+    categoryGrid.innerHTML = '';
 
-// ===========================
-// FOLDER MANAGEMENT
-// ===========================
-function createFolder(name, description) {
-  const folder = {
-    id: Date.now().toString(),
-    name,
-    description,
-    photos: [],
-    createdAt: new Date().toISOString()
-  };
-  folders.push(folder);
-  saveToStorage();
-  return folder;
-}
+    Object.keys(categories).forEach(categoryKey => {
+        const category = categories[categoryKey];
+        const photoCount = categoryKey === 'todas'
+            ? getAllPhotos().length
+            : (photoDatabase[categoryKey]?.length || 0);
 
-function updateFolder(id, name, description) {
-  const folder = folders.find(f => f.id === id);
-  if (folder) {
-    folder.name = name;
-    folder.description = description;
-    saveToStorage();
-  }
-}
+        const card = document.createElement('div');
+        card.className = `category-card ${categoryKey === currentCategory ? 'active' : ''}`;
+        card.dataset.category = categoryKey;
 
-function deleteFolder(id) {
-  folders = folders.filter(f => f.id !== id);
-  saveToStorage();
-}
+        card.innerHTML = `
+            <div class="category-name">${category.name}</div>
+            <div class="category-count">${photoCount} foto${photoCount !== 1 ? 's' : ''}</div>
+        `;
 
-function getFolder(id) {
-  return folders.find(f => f.id === id);
-}
-
-// ===========================
-// PHOTO MANAGEMENT
-// ===========================
-function addPhotosToFolder(folderId, photoDataArray) {
-  const folder = getFolder(folderId);
-  if (folder) {
-    photoDataArray.forEach(photoData => {
-      folder.photos.push({
-        id: Date.now().toString() + Math.random(),
-        data: photoData,
-        addedAt: new Date().toISOString()
-      });
+        card.addEventListener('click', () => selectCategory(categoryKey));
+        categoryGrid.appendChild(card);
     });
-    saveToStorage();
-  }
 }
 
-// ===========================
-// UI RENDERING
-// ===========================
-function renderFolders() {
-  const grid = document.getElementById('folders-grid');
-  const emptyState = document.getElementById('folders-empty');
+// Get all photos from all categories
+function getAllPhotos() {
+    const allPhotos = [];
+    Object.keys(photoDatabase).forEach(categoryKey => {
+        photoDatabase[categoryKey].forEach(photo => {
+            allPhotos.push({
+                ...photo,
+                category: categories[categoryKey].name
+            });
+        });
+    });
+    return allPhotos;
+}
 
-  if (folders.length === 0) {
-    grid.innerHTML = '';
-    emptyState.classList.remove('hidden');
-  } else {
-    emptyState.classList.add('hidden');
-    grid.innerHTML = folders.map(folder => {
-      const photoCount = folder.photos.length;
-      const thumbnail = photoCount > 0 ? folder.photos[0].data : null;
+// Select a category
+function selectCategory(categoryKey) {
+    currentCategory = categoryKey;
 
-      return `
-        <div class="folder-card" data-folder-id="${folder.id}">
-          <div class="folder-thumbnail">
-            ${thumbnail
-          ? `<img src="${thumbnail}" alt="${folder.name}">`
-          : '<div class="folder-placeholder">📁</div>'
-        }
-          </div>
-          <div class="folder-info">
-            <h3 class="folder-title">${folder.name}</h3>
-            <p class="folder-description">${folder.description || 'Sem descrição'}</p>
-            <div class="folder-meta">
-              <span>${photoCount} foto${photoCount !== 1 ? 's' : ''}</span>
-              <div class="folder-actions">
-                <button class="action-btn edit-folder-btn" data-folder-id="${folder.id}" title="Editar">✏️</button>
-                <button class="action-btn delete-folder-btn" data-folder-id="${folder.id}" title="Excluir">🗑️</button>
-              </div>
+    // Update active state on category cards
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.category === categoryKey);
+    });
+
+    // Update gallery title and description
+    const category = categories[categoryKey];
+    galleryTitle.textContent = category.name;
+    galleryDescription.textContent = category.description;
+
+    // Render photos for selected category
+    renderPhotos(categoryKey);
+}
+
+// Render photos
+function renderPhotos(categoryKey) {
+    photoGrid.innerHTML = '';
+
+    // Get photos for the category
+    let photos = [];
+    if (categoryKey === 'todas') {
+        photos = getAllPhotos();
+    } else {
+        photos = (photoDatabase[categoryKey] || []).map(photo => ({
+            ...photo,
+            category: categories[categoryKey].name
+        }));
+    }
+
+    currentPhotos = photos;
+
+    if (photos.length === 0) {
+        photoGrid.innerHTML = `
+            <div class="empty-state">
+                <h3>Nenhuma foto encontrada</h3>
+                <p>Esta categoria ainda não possui fotos.</p>
             </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    // Add event listeners
-    document.querySelectorAll('.folder-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (!e.target.closest('.folder-actions')) {
-          const folderId = card.dataset.folderId;
-          openFolder(folderId);
-        }
-      });
-    });
-
-    document.querySelectorAll('.edit-folder-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const folderId = btn.dataset.folderId;
-        openEditFolderModal(folderId);
-      });
-    });
-
-    document.querySelectorAll('.delete-folder-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const folderId = btn.dataset.folderId;
-        openDeleteModal(folderId);
-      });
-    });
-  }
-}
-
-function renderPhotos(folderId) {
-  const folder = getFolder(folderId);
-  if (!folder) return;
-
-  const grid = document.getElementById('photos-grid');
-  const emptyState = document.getElementById('photos-empty');
-  const title = document.getElementById('folder-view-title');
-  const description = document.getElementById('folder-view-description');
-
-  title.textContent = folder.name;
-  description.textContent = folder.description || '';
-
-  if (folder.photos.length === 0) {
-    grid.innerHTML = '';
-    emptyState.classList.remove('hidden');
-  } else {
-    emptyState.classList.add('hidden');
-    grid.innerHTML = folder.photos.map((photo, index) => `
-      <div class="photo-item" data-photo-index="${index}">
-        <img src="${photo.data}" alt="Foto ${index + 1}">
-      </div>
-    `).join('');
-
-    // Add event listeners
-    document.querySelectorAll('.photo-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const index = parseInt(item.dataset.photoIndex);
-        openLightbox(index);
-      });
-    });
-  }
-}
-
-// ===========================
-// VIEW NAVIGATION
-// ===========================
-function showFoldersView() {
-  document.getElementById('folders-view').classList.remove('hidden');
-  document.getElementById('photos-view').classList.add('hidden');
-  document.getElementById('intro').classList.remove('hidden'); // Show intro on home
-  document.getElementById('breadcrumb').classList.remove('active');
-  currentFolderId = null;
-  renderFolders();
-}
-
-function openFolder(folderId) {
-  currentFolderId = folderId;
-  const folder = getFolder(folderId);
-
-  document.getElementById('folders-view').classList.add('hidden');
-  document.getElementById('photos-view').classList.remove('hidden');
-  document.getElementById('intro').classList.add('hidden'); // Hide intro inside folder
-  document.getElementById('breadcrumb').classList.add('active');
-  document.getElementById('breadcrumb-current').textContent = folder.name;
-
-  renderPhotos(folderId);
-}
-
-// ===========================
-// MODAL MANAGEMENT
-// ===========================
-function openNewFolderModal() {
-  currentEditingFolderId = null;
-  document.getElementById('folder-modal-title').textContent = 'Nova Pasta';
-  document.getElementById('folder-name').value = '';
-  document.getElementById('folder-description').value = '';
-  document.getElementById('folder-modal').classList.add('active');
-  document.getElementById('folder-name').focus();
-}
-
-function openEditFolderModal(folderId) {
-  currentEditingFolderId = folderId;
-  const folder = getFolder(folderId);
-
-  document.getElementById('folder-modal-title').textContent = 'Editar Pasta';
-  document.getElementById('folder-name').value = folder.name;
-  document.getElementById('folder-description').value = folder.description || '';
-  document.getElementById('folder-modal').classList.add('active');
-  document.getElementById('folder-name').focus();
-}
-
-function closeFolderModal() {
-  document.getElementById('folder-modal').classList.remove('active');
-  currentEditingFolderId = null;
-}
-
-function saveFolderModal() {
-  const name = document.getElementById('folder-name').value.trim();
-  const description = document.getElementById('folder-description').value.trim();
-
-  if (!name) {
-    alert('Por favor, insira um nome para a pasta');
-    return;
-  }
-
-  if (currentEditingFolderId) {
-    updateFolder(currentEditingFolderId, name, description);
-    if (currentFolderId === currentEditingFolderId) {
-      renderPhotos(currentFolderId);
-      document.getElementById('breadcrumb-current').textContent = name;
-    } else {
-      renderFolders();
+        `;
+        return;
     }
-  } else {
-    createFolder(name, description);
-    renderFolders();
-  }
 
-  closeFolderModal();
-}
+    // Create photo cards
+    photos.forEach((photo, index) => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
 
-function openUploadModal() {
-  selectedFiles = [];
-  document.getElementById('upload-preview').innerHTML = '';
-  document.getElementById('confirm-upload-btn').disabled = true;
-  document.getElementById('upload-modal').classList.add('active');
-}
+        card.innerHTML = `
+            <div class="photo-wrapper">
+                <img src="${photo.file}" alt="${photo.name}" class="photo-image" loading="lazy">
+            </div>
+            <div class="photo-info">
+                <div class="photo-category">${photo.category}</div>
+            </div>
+        `;
 
-function closeUploadModal() {
-  document.getElementById('upload-modal').classList.remove('active');
-  selectedFiles = [];
-}
-
-function openDeleteModal(folderId) {
-  currentEditingFolderId = folderId;
-  const folder = getFolder(folderId);
-  document.getElementById('delete-message').textContent =
-    `Tem certeza que deseja excluir a pasta "${folder.name}" e todas as suas ${folder.photos.length} foto(s)?`;
-  document.getElementById('delete-modal').classList.add('active');
-}
-
-function closeDeleteModal() {
-  document.getElementById('delete-modal').classList.remove('active');
-  currentEditingFolderId = null;
-}
-
-function confirmDelete() {
-  if (currentEditingFolderId) {
-    deleteFolder(currentEditingFolderId);
-    closeDeleteModal();
-
-    if (currentFolderId === currentEditingFolderId) {
-      showFoldersView();
-    } else {
-      renderFolders();
-    }
-  }
-}
-
-// ===========================
-// FILE UPLOAD
-// ===========================
-function handleFileSelect(files) {
-  selectedFiles = Array.from(files).filter(file => file.type.startsWith('image/'));
-
-  if (selectedFiles.length === 0) {
-    alert('Por favor, selecione apenas arquivos de imagem');
-    return;
-  }
-
-  const preview = document.getElementById('upload-preview');
-  preview.innerHTML = `<p style="color: var(--text-secondary);">${selectedFiles.length} arquivo(s) selecionado(s)</p>`;
-  document.getElementById('confirm-upload-btn').disabled = false;
-}
-
-function confirmUpload() {
-  if (selectedFiles.length === 0 || !currentFolderId) return;
-
-  const uploadButton = document.getElementById('confirm-upload-btn');
-  uploadButton.textContent = 'Carregando...';
-  uploadButton.disabled = true;
-
-  const photoPromises = selectedFiles.map(file => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => resolve(e.target.result);
-      reader.readAsDataURL(file);
+        card.addEventListener('click', () => openLightbox(index));
+        photoGrid.appendChild(card);
     });
-  });
-
-  Promise.all(photoPromises).then(photoDataArray => {
-    addPhotosToFolder(currentFolderId, photoDataArray);
-    renderPhotos(currentFolderId);
-    closeUploadModal();
-    uploadButton.textContent = 'Upload';
-  });
 }
 
-// ===========================
-// LIGHTBOX
-// ===========================
+// Open lightbox
 function openLightbox(index) {
-  const folder = getFolder(currentFolderId);
-  if (!folder || !folder.photos[index]) return;
-
-  currentPhotoIndex = index;
-  document.getElementById('lightbox-image').src = folder.photos[index].data;
-  document.getElementById('lightbox').classList.add('active');
-
-  updateLightboxNavigation();
+    currentPhotoIndex = index;
+    updateLightboxImage();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
+// Close lightbox
 function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
 }
 
-function navigateLightbox(direction) {
-  const folder = getFolder(currentFolderId);
-  if (!folder) return;
+// Update lightbox image
+function updateLightboxImage() {
+    const photo = currentPhotos[currentPhotoIndex];
+    if (!photo) return;
 
-  currentPhotoIndex += direction;
-
-  if (currentPhotoIndex < 0) {
-    currentPhotoIndex = folder.photos.length - 1;
-  } else if (currentPhotoIndex >= folder.photos.length) {
-    currentPhotoIndex = 0;
-  }
-
-  document.getElementById('lightbox-image').src = folder.photos[currentPhotoIndex].data;
-  updateLightboxNavigation();
+    lightboxImage.src = photo.file;
+    lightboxImage.alt = photo.name;
+    lightboxCategory.textContent = photo.category;
+    lightboxCounter.textContent = `${currentPhotoIndex + 1} / ${currentPhotos.length}`;
 }
 
-function updateLightboxNavigation() {
-  const folder = getFolder(currentFolderId);
-  const prevBtn = document.getElementById('lightbox-prev');
-  const nextBtn = document.getElementById('lightbox-next');
-
-  if (folder && folder.photos.length > 1) {
-    prevBtn.style.display = 'block';
-    nextBtn.style.display = 'block';
-  } else {
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
-  }
+// Navigate to previous photo
+function previousPhoto() {
+    currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
+    updateLightboxImage();
 }
 
-// ===========================
-// EVENT LISTENERS
-// ===========================
-document.addEventListener('DOMContentLoaded', () => {
-  loadFromStorage();
-  renderFolders();
+// Navigate to next photo
+function nextPhoto() {
+    currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
+    updateLightboxImage();
+}
 
-  // Folder Modal
-  document.getElementById('new-folder-btn').addEventListener('click', openNewFolderModal);
-  document.getElementById('empty-new-folder-btn').addEventListener('click', openNewFolderModal);
-  document.getElementById('close-folder-modal').addEventListener('click', closeFolderModal);
-  document.getElementById('cancel-folder-btn').addEventListener('click', closeFolderModal);
-  document.getElementById('save-folder-btn').addEventListener('click', saveFolderModal);
+// Setup event listeners
+function setupEventListeners() {
+    // Lightbox controls
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', previousPhoto);
+    lightboxNext.addEventListener('click', nextPhoto);
 
-  // Folder Form Submit
-  document.getElementById('folder-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    saveFolderModal();
-  });
-
-  // Upload Modal
-  document.getElementById('upload-photos-btn').addEventListener('click', openUploadModal);
-  document.getElementById('empty-upload-btn').addEventListener('click', openUploadModal);
-  document.getElementById('close-upload-modal').addEventListener('click', closeUploadModal);
-  document.getElementById('cancel-upload-btn').addEventListener('click', closeUploadModal);
-  document.getElementById('confirm-upload-btn').addEventListener('click', confirmUpload);
-
-  // File Upload
-  const fileInput = document.getElementById('file-input');
-  const fileUploadArea = document.getElementById('file-upload-area');
-
-  fileUploadArea.addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', (e) => handleFileSelect(e.target.files));
-
-  // Drag and Drop
-  fileUploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    fileUploadArea.classList.add('drag-over');
-  });
-
-  fileUploadArea.addEventListener('dragleave', () => {
-    fileUploadArea.classList.remove('drag-over');
-  });
-
-  fileUploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    fileUploadArea.classList.remove('drag-over');
-    handleFileSelect(e.dataTransfer.files);
-  });
-
-  // Delete Modal
-  document.getElementById('close-delete-modal').addEventListener('click', closeDeleteModal);
-  document.getElementById('cancel-delete-btn').addEventListener('click', closeDeleteModal);
-  document.getElementById('confirm-delete-btn').addEventListener('click', confirmDelete);
-
-  // Breadcrumb
-  document.getElementById('breadcrumb-home').addEventListener('click', showFoldersView);
-  document.getElementById('logo-link').addEventListener('click', (e) => {
-    e.preventDefault();
-    showFoldersView();
-  });
-
-  // Lightbox
-  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-  document.getElementById('lightbox-prev').addEventListener('click', () => navigateLightbox(-1));
-  document.getElementById('lightbox-next').addEventListener('click', () => navigateLightbox(1));
-
-  // Lightbox keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (document.getElementById('lightbox').classList.contains('active')) {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') navigateLightbox(-1);
-      if (e.key === 'ArrowRight') navigateLightbox(1);
-    }
-  });
-
-  // Close modals on background click
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-      }
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
     });
-  });
-});
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        switch (e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                previousPhoto();
+                break;
+            case 'ArrowRight':
+                nextPhoto();
+                break;
+        }
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
